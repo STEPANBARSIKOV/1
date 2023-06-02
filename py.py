@@ -36,9 +36,15 @@ async def on_message(message):
         emojis = ['😃', '😊', '👍', '❤️', '🎉', '🔥']
         random_emoji = random.choice(emojis)
         await message.channel.send(random_emoji)
-    elif message.content.startswith('!randomuser'):
-        users = ['@Ржаная кувалда', '@жареный перфоратор', '@вяленый отбойник', '@пареная отвертка', '@Печеная дрель', '@вареный молоток']
-        random_user = random.choice(users)
-        await message.channel.send(random_user)
+@client.event
+async def on_ready():
+    print(f'Бот {client.user} готов к работе')
+@client.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    if message.content.startswith('!монетка'):
+        result = random.choice(['Орёл', 'Решка'])
+        await message.channel.send(f'Результат подбрасывания монетки: {result}')
 
 client.run("MTEwNDQwMDgzODcxMTA2MjY0MA.GkbNHH.AyY_m5LhreCoR_Paw1mIAypNRwjz1v3n60QdGc")
